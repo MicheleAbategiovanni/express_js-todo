@@ -1,8 +1,55 @@
 <%- include('./includes/header.ejs') %>
 
-<body>
-    <%- include('./includes/navbar.ejs') %>
+    <body>
+        <%- include('./includes/navbar.ejs') %>
 
-    <h1 class="text-primary">H3LL0 W0RLDs</h1>
-</body>
-</html>
+            <main>
+
+                <div class="container">
+                    <h1 class="text-primary">H3LL0 W0RLDs</h1>
+
+                    <div class="py-5">
+                        <form action="/new-todo" method="post">
+
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Todo" aria-label="Todo"
+                                    aria-describedby="basic-addon2" name="title">
+                                <button class="input-group-text" type="submit" id="basic-addon2">Aggiungi</button>
+                            </div>
+
+                        </form>
+                    </div>
+
+                    <div class="py-5">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% todos.forEach((todo, index) => { %>
+                                    <tr>
+                                        <th scope="row"><%= index + 1 %></th>
+                                        <td><%= todo.title %></td>
+                                        <td>
+                                            <form action="/delete-todo" method="POST">
+                                                <input type="hidden" value="<%= todo.id %>" name="todoId">
+                                                <button class="btn btn-danger" type="submit">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </main>
+
+    </body>
+
+    </html>

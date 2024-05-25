@@ -4,6 +4,7 @@ const sequelize = require('../helper/database');
 const bodyParser = require('body-parser');
 const indexRoutes = require('../src/routes/index');
 const path = require('path');
+const Todo = require('./models/Todo'); 
 
 app.use(express.static(path.join(__dirname, 'public')))
 
@@ -14,6 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(indexRoutes);
 
 
-sequelize.sync({force: true}).then(result => {
+sequelize.sync().then(result => {
     app.listen(3000);
+    console.log('ciao');
 }).catch(err => console.log(err));
